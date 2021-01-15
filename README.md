@@ -3,6 +3,9 @@
 ## How to add this to your project?
 ```
 $ yarn add @KrashidBuilt/common@github:https://github.com/krashidbuilt/common-js-library.git
+
+$ # add dev dependencies for linters
+$ yarn add -D babel-eslint eslint eslint-plugin-prefer-arrow
 ```
 
 ## How to update your version of this library?
