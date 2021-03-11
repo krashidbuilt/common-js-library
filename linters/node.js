@@ -19,6 +19,7 @@ module.exports = {
         'eslint:recommended',
     ],
     'rules': {
+        'no-multiple-empty-lines': ['error', { 'max': 2, 'maxEOF': 0 }],
         'no-console': 'error',
         'lines-between-class-members': [
             'error',

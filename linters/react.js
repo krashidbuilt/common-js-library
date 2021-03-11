@@ -54,6 +54,7 @@ module.exports = {
     },
 
     'rules': REACT_APP_DISABLE_ESLINT ? {} : {
+        'no-multiple-empty-lines': ['error', { 'max': 2, 'maxEOF': 0 }],
         'no-console': 'error',
         'lines-between-class-members': [
             'error',
