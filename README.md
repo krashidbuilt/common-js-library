@@ -5,10 +5,10 @@
 $ yarn add @KrashidBuilt/common@github:https://github.com/krashidbuilt/common-js-library.git
 
 $ # add dev dependencies for linters
-$ yarn add -D babel-eslint eslint
+$ yarn add -D eslint-plugin-prefer-arrow babel-eslint eslint
 
 $ # add dev dependencies for react specific linters
-$ yarn add -D eslint-plugin-prefer-arrow eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import eslint-plugin-json
+$ yarn add -D eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import eslint-plugin-json
 
 ```
 
@@ -29,7 +29,7 @@ module.exports = require('@KrashidBuilt/common/linters/react');
 ```
 
 ## How to use the common logger?
-Instantiate the logger with a prepend, i prefer to use the `__filename` global variable.
+Instantiate the logger with a prepend, I prefer to use the `__filename` global variable.
 ```
 const Logger = require('@KrashidBuilt/common/utils/logger');
 const logger = new Logger(__filename);

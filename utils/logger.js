@@ -1,9 +1,22 @@
 /* eslint-disable no-console */
 const path = require('path');
+const { LOG_LEVEL } = require('../constants');
 
 const { parentFuncName, getLocalDateTime, isLocalDevelopment } = require('./common');
 
 const isDev = isLocalDevelopment();
+
+const LOG_LEVEL_MAP = {
+    EXTRA: -1,
+    TRACE: 0,
+    DEBUG: 1,
+    INFO: 2,
+    WARN: 3,
+    ERROR: 4,
+    FATAL: 5,
+};
+
+const DEV_ONLY = ['EXTRA', 'TRACE'];
 
 module.exports = class Logger {
     constructor(prepend, basename = true) {
@@ -29,44 +42,43 @@ module.exports = class Logger {
         }
 
         this.build = (level) => {
-            const a = [`[${getLocalDateTime()}]`, `[${level}]`];
+            const a = [];
+
+            a.push(`[${getLocalDateTime()}]`);
+            a.push(`[${level}]`);
+
             if (prepend && prepend !== 'index.js') {
                 a.push(`[${prepend}]`);
             }
             return a;
         };
 
-        this.trace = (...x) => {
-            if (isDev) {
-                console.log(...this.build('TRACE'), `[${parentFuncName()}]`, ...x);
-                console.trace();
-            }
-        };
+        this.extra = () => { };
+        this.trace = () => { };
+        this.debug = () => { };
+        this.info = () => { };
+        this.warn = () => { };
+        this.error = () => { };
+        this.fatal = () => { };
 
-        this.extra = (...x) => {
-            if (isDev) {
-                console.log(...this.build('EXTRA'), `[${parentFuncName()}]`, ...x);
-            }
-        };
+        Object
+            .keys(LOG_LEVEL_MAP)
+            .forEach((level) => {
 
-        this.debug = (...x) => {
-            console.log(...this.build('DEBUG'), `[${parentFuncName()}]`, ...x);
-        };
+                // validate env LOG_LEVEL
+                if (LOG_LEVEL_MAP[LOG_LEVEL] > LOG_LEVEL_MAP[level] || (!isDev && DEV_ONLY.indexOf(level) >= 0)) {
+                    return;
+                }
 
-        this.info = (...x) => {
-            console.log(...this.build('INFO'), `[${parentFuncName()}]`, ...x);
-        };
+                this[level.toLowerCase()] = (...x) => {
+                    const params = [...this.build(level), `[${parentFuncName()}]`, ...x];
+                    if (level === 'TRACE') {
+                        console.trace(...params);
+                    } else {
+                        console.log(...params);
+                    }
+                };
 
-        this.warn = (...x) => {
-            console.warn(...this.build('WARN'), `[${parentFuncName()}]`, ...x);
-        };
-
-        this.error = (...x) => {
-            console.error(...this.build('ERROR'), `[${parentFuncName()}]`, ...x);
-        };
-
-        this.fatal = (...x) => {
-            console.error(...this.build('FATAL'), `[${parentFuncName()}]`, ...x);
-        };
+            });
     }
 };

@@ -1,4 +1,4 @@
-let { NODE_ENV = 'development' } = process.env;
+let { NODE_ENV = 'development', LOG_LEVEL = 'EXTRA' } = process.env;
 
 if (typeof window !== 'undefined') {
     try {
@@ -17,4 +17,5 @@ if (typeof window !== 'undefined') {
 
 module.exports = {
     NODE_ENV,
+    LOG_LEVEL,
 };
