@@ -84,6 +84,17 @@ const getLocalDateTime = (millis = new Date().getTime(), timeZone = 'America/Los
     }
 };
 
+const removeEmptyStringElements = (obj) => {
+    for (let prop in obj) {
+        if (typeof obj[prop] === 'object') {// dive deeper in
+            removeEmptyStringElements(obj[prop]);
+        } else if (obj[prop] === '') {// delete elements that are empty strings
+            delete obj[prop];
+        }
+    }
+    return obj;
+};
+
 module.exports = {
     isValidEmail,
     isLocalDevelopment,
@@ -92,4 +103,5 @@ module.exports = {
     funcName,
     parentFuncName,
     getLocalDateTime,
+    removeEmptyStringElements,
 };
