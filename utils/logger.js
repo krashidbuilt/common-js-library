@@ -33,14 +33,6 @@ module.exports = class Logger {
             } catch (error) { }
         }
 
-        if (!console.warn) {
-            console.warn = console.log;
-        }
-
-        if (!console.error) {
-            console.error = console.log;
-        }
-
         this.build = (level) => {
             const a = [];
 
@@ -70,10 +62,14 @@ module.exports = class Logger {
                     return;
                 }
 
-                this[level.toLowerCase()] = (...x) => {
+                const lower = level.toLowerCase();
+
+                this[lower] = (...x) => {
                     const params = [...this.build(level), `[${parentFuncName()}]`, ...x];
-                    if (level === 'TRACE') {
-                        console.trace(...params);
+
+                    // default to console level if it exists
+                    if (console[lower]) {
+                        console[lower](...params);
                     } else {
                         console.log(...params);
                     }
