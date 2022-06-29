@@ -5,7 +5,7 @@
 $ yarn add @KrashidBuilt/common@github:https://github.com/krashidbuilt/common-js-library.git
 
 $ # add dev dependencies for linters
-$ yarn add -D eslint-plugin-prefer-arrow babel-eslint eslint
+$ yarn add -D eslint-plugin-prefer-arrow @babel/core @babel/eslint-parser eslint
 
 $ # add dev dependencies for react specific linters
 $ yarn add -D eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import eslint-plugin-json
