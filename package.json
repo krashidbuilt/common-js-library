@@ -16,7 +16,8 @@
     "bump": "$(npm bin)/bump --tag --commit && git push && git push --tags"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
+    "@babel/core": "^7.18.6",
+    "@babel/eslint-parser": "^7.18.2",
     "eslint": "^7.17.0",
     "eslint-plugin-prefer-arrow": "^1.2.2",
     "pre-commit": "^1.2.2",

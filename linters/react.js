@@ -1,13 +1,14 @@
 const { REACT_APP_DISABLE_ESLINT = false } = process.env;
 
 module.exports = {
-    'parser': 'babel-eslint',
     'env': {
         'browser': true,
         'node': true,
         'es2021': true
     },
     'parserOptions': {
+        'parser': '@babel/eslint-parser',
+        'requireConfigFile': false,
         'ecmaVersion': 2021,
         'sourceType': 'module',
         'allowImportExportEverywhere': true,
