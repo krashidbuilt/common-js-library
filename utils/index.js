@@ -1,4 +1,4 @@
 module.exports = {
     common: require('./common'),
-    logger: require('./logger')
+    Logger: require('./logger')
 };
